@@ -43,7 +43,7 @@ app.get("/upload", (req, res) => {
     });
 });
 // Обработка POST-запроса на загрузку файла - СРАБОТАЕТ ПРИ НАЖАТИИ КНОПКИ
-// Middleware upload.single("filedata") обрабатывает одно поле с именем "filedata"
+// Middleware upload.single("filedata") обрабатывает одно поле формы с именем "filedata"
 app.post("/upload", upload.single("filedata"), (req, res) => {
     if (!req.file) {// если файл не был загружен, отправляем сообщение об ошибке
         return res.send("Ошибка при загрузке файла");
