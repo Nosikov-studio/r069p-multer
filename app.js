@@ -1,10 +1,12 @@
 const express = require("express");
+
 const hbs = require("hbs");
+const folder = require("./folder");
 const multer = require("multer");
 const path = require("path");
 
 const app = express();
-
+app.use('/files', express.static('files'));
 // Конфигурация хранилища для multer:
 //  - destination: папка для сохранения загружаемых файлов ("files")
 //  - filename: сохраняем файл под оригинальным именем
@@ -21,15 +23,16 @@ const storageConfig = multer.diskStorage({
 const upload = multer({ storage: storageConfig });
 
 app.set("view engine", "hbs"); // устанавливаем Handlebars как движок шаблонов
-// Подключаем папку "public" как статическую для отдачи CSS, JS, изображений и т.п.
-app.use(express.static(path.join(__dirname, "public"))); // или "files"
+
 // Регистрируем частичные шаблоны Handlebars для повторяющихся фрагментов в "views/partial"
 hbs.registerPartials(path.join(__dirname, "views/partial"));
 // Главная страница – рендерим шаблон "index" с данными
 app.get("/", (req, res) => {
+    let links=folder.getFiles("./files/");
     res.render("index", {
         title: "ГЛАВНАЯ СТРАНИЦА",
-        description: "Вывод хранимых файлов"
+        description: "Вывод хранимых файлов",
+        links: links
     });
 });
 // Страница загрузки файла – рендерим шаблон "upload" с кнопкой загрузки

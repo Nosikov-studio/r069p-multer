@@ -10,5 +10,12 @@
     <hr>
     <h3> Файловое хранилище</h3>
     <div> {{description}}</div>
+    <div>
+        <ul>
+            {{#each links}}
+            <li><a href="/files/{{this}}" title="{{this}}">{{this}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
 </body>
 </html>
