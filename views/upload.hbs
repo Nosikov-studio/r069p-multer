@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка файла</title>
+</head>
+<body>
+    <div>{{> menu}}</div>
+    <hr>
+    <h1>Загрузка {{title}}</h1>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="filedata">
+    <button type="submit"> {{btn}}</button>
+    </form>
+</body>
+</html>
